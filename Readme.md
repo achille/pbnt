@@ -15,6 +15,11 @@ To run the example files navigate to the examples directory and run:
 ```
 python exampleinference.py
 ```
+if everything is working properly, you should get:
+```
+The marginal probability of sprinkler=false: 0.7
+The marginal probability of wetgrass=false | cloudy=False, rain=True: 0.3025
+```
 
 
 Project information
