@@ -21,7 +21,7 @@ Inline-style:
 
 To run the example files navigate to the examples directory and run:
 ```
-python exampleinference.py
+$ python exampleinference.py
 ```
 if everything is working properly, you should get:
 ```
@@ -43,8 +43,81 @@ Example:
 cNode = BayesNode(0, 2, name="cloudy")
 ```
 
-To Be Completed...
+Declare Parent and Child Nodes to nodes:
 
+```python
+cNode.addChild(sNode)
+cNode.addParent(cNode)
+```
+
+Assign Nodes to an array
+
+```python
+nodes = [cNode, sNode, rNode, wNode]
+```
+
+set the distributions
+
+An example to set distribution of probability that is not conditional:
+```python
+#cloudy distribution
+cDistribution = DiscreteDistribution(cNode)
+index = cDistribution.generate_index([],[])
+cDistribution[index] = 0.5
+cNode.set_dist(cDistribution)
+```
+Note: The distribution index is 0.5, which sets the probability for both true and false automatically since (1 - 0.5) is 0.5.
+
+An example for conditional probability
+```python
+#sprinkler
+dist = zeros([cNode.size(),sNode.size()], dtype=float32)
+dist[0,] = 0.5
+dist[1,] = [0.9,0.1]
+sDistribution = ConditionalDiscreteDistribution(nodes=[cNode, sNode], table=dist)
+sNode.set_dist(sDistribution)
+```
+Note: Dist[1,] = [0.9,0.1] is read that given cNode (cloudy) == True, the probability of Sprinkler being False is 0.9 and true is 0.1.
+
+Once the distributions are created, assign the node array to a Bayes Network
+```python
+bnet = BayesNet(nodes)
+```
+
+Building an Inference:
+-------------------
+based on the index of the nodes in your model, assign your nodes to variables:
+```python
+for node in water.nodes:
+      if node.id == 0:
+          cloudy = node
+      if node.id == 1:
+          sprinkler = node
+      if node.id == 2:
+          rain = node
+      if node.id == 3:
+          wetgrass = node
+```
+Then create the inference engine:
+```python
+engine = JunctionTreeEngine(bnet)
+```
+Set evidence if needed:
+```python
+engine.evidence[cloudy] = False
+engine.evidence[rain] = True
+```
+Generate a Query and calculate the marginal probability given the evidence
+```python
+Q = engine.marginal(wetgrass)[0]
+index = Q.generate_index([False],range(Q.nDims))
+```
+Note: The first line sets the variable we are examining, in this case wetgrass. The generate index function specifies the result we are looking for, in this instance, we are looking to see if wetgrass is false.
+
+Print out the probability found
+```python
+print Q[index]
+```
 
 Project information
 -------------------
