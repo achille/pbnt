@@ -79,7 +79,6 @@ def water():
     #cloudy distribution
     cDistribution = DiscreteDistribution(cNode)
     index = cDistribution.generate_index([],[])
-    # embed()
     cDistribution[index] = 0.5
     cNode.set_dist(cDistribution)
 
@@ -111,4 +110,3 @@ def water():
     bnet = BayesNet(nodes)
 
     return bnet
-
