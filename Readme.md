@@ -25,8 +25,8 @@ $ python exampleinference.py
 ```
 if everything is working properly, you should get:
 ```
-The marginal probability of sprinkler=false: 0.7
-The marginal probability of wetgrass=false | cloudy=False, rain=True: 0.3025
+The marginal probability of sprinkler=false: 0.801029
+The marginal probability of wetgrass=false | cloudy=False, rain=True: 0.055
 ```
 
 Creating a Model:
