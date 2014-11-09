@@ -250,11 +250,11 @@ class JunctionTreeEngine(InferenceEngine):
 
     def marginal(self, query):
         # DELETE: When change_evidence is completed delete this.
-        # if not self.joinTree.initialized:
-        #     self.joinTree.reinitialize(self.bnet.nodes)
+        if not self.joinTree.initialized:
+            self.joinTree.reinitialize(self.bnet.nodes)
 
-        # self.joinTree.enter_evidence(self.evidence, self.bnet.nodes)
-        # self.global_propagation()
+        self.joinTree.enter_evidence(self.evidence, self.bnet.nodes)
+        self.global_propagation()
         # DELETE: End delete here
 
         distributions = []

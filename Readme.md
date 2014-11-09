@@ -86,7 +86,7 @@ bnet = BayesNet(nodes)
 
 Building an Inference:
 -------------------
-based on the index of the nodes in your model, assign your nodes to variables:
+Based on the index of the nodes in your model, assign your nodes to variables:
 ```python
 for node in water.nodes:
       if node.id == 0:

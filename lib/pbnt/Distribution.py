@@ -97,7 +97,7 @@ class Potential(object):
         """
         if isinstance(index, (int, float, long)):
             index = [index]
-        assert(len(index) == len(axis))
+        # assert(len(index) == len(axis))
         tmp = zeros(self.nDims) - 1
         if len(axis) > 0:
             tmp[axis] = index
