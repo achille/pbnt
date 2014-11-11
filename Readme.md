@@ -46,8 +46,8 @@ cNode = BayesNode(0, 2, name="cloudy")
 Declare Parent and Child Nodes to nodes:
 
 ```python
-cNode.addChild(sNode)
-cNode.addParent(cNode)
+cNode.add_child(sNode)
+cNode.add_parent(cNode)
 ```
 
 Assign Nodes to an array
